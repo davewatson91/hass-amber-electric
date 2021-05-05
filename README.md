@@ -1,5 +1,7 @@
 # Home Assistant Plugin for Amber Electric Real-Time Pricing
 
+#### This fork is originally developed by lewisbenge/hass-amber-electric, continued here for ongoing maintenance due to a group of users relying on this for the Australian market. Please note I am not a qualified dev, and welcome any assistance to keeping this maintained. 
+
 A custom component for Home Assistant (www.home-assistant.io) to pull the latest energy prices from the Amber Electric (https://www.amberelectric.com.au/) REST API based on Post Code.
 
 # How to install
@@ -16,7 +18,9 @@ sensor:
 
 Once deployed, you should see 2 sensors added to your Home Assistant entities list, one reflects the current solar feed-in tarrif, and the second is the real-time grid price charged by Amber (including their network fees).
 
-# Analysing Price Predictions
+# Example Usage
+
+## Analysing Price Predictions
 
 The 12 hour price predictions from Amber for both solar FiT and grid usage are available as an attribute of the sensor. To use this data-set in automation or scenes, it is best to return the array using a template to achieve what you need.
 
@@ -36,6 +40,31 @@ To get a mean value for the next 12 hours (so you can look at price change to de
 ```
 
 Typically within a template you want to return a single value, to this example would need to be tailored to your specific use-case. You can experiment with Templates in the Developer Tools section of your Home Assistant portal.
+
+## Example sensor template
+
+```sensor:
+  - platform: amberelectric
+    postcode: "2000"
+    
+  - platform: template
+    sensors:
+      amber_peak_predicted_2h:
+        friendly_name: "Amber 2 hour peak predicted"
+        unit_of_measurement: "c/kWh"
+        value_template: >-
+          {% set forecast = states.sensor.amber_general_usage_price.attributes['price_forcecast'] %}
+          {% set highest = forecast[0:4] | sort(reverse=true, attribute='price') | first() %}
+          {{highest['price']}}
+      amber_peak_predicted_4h:
+        friendly_name: "Amber 4 hour peak predicted"
+        unit_of_measurement: "c/kWh"
+        value_template: >-
+          {% set forecast = states.sensor.amber_general_usage_price.attributes['price_forcecast'] %}
+          {% set highest = forecast[0:8] | sort(reverse=true, attribute='price') | first() %}
+          {{highest['price']}}
+```
+# Troubleshooting
 
 ## Numbers don't look right?
 
