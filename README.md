@@ -16,7 +16,9 @@ sensor:
     postcode: "2000"
 ```
 
-Once deployed, you should see 2 sensors added to your Home Assistant entities list, one reflects the current solar feed-in tarrif, and the second is the real-time grid price charged by Amber (including their network fees).
+After editing your configuration.yaml, you will need to restart Home Assistant. 
+
+Once deployed, you should see 3 sensors added to your Home Assistant entities list, one reflects the current solar feed-in tarrif, and the second is the real-time grid price charged by Amber (including their network fees), and a third for real-time controlled grid pricing.
 
 # Example Usage
 
