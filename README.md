@@ -1,5 +1,11 @@
 # Home Assistant Plugin for Amber Electric Real-Time Pricing
 
+## ** ATTENTION **
+
+## I have been in contact with Amber -> this API will be deprecated over a 6 month period, with a new API almost ready for release. One of the developers at Amber (creating the API, will also be developing (in his personal capacity I believe) an integration for Home Assistant. 
+
+
+
 #### This fork is based on the repo originally developed by lewisbenge/hass-amber-electric, continued here for ongoing maintenance due to a group of users relying on this for the Australian market. Please note I am not a qualified dev, and welcome any assistance to keeping this maintained. 
 
 A custom component for Home Assistant (www.home-assistant.io) to pull the latest energy prices from the Amber Electric (https://www.amberelectric.com.au/) REST API based on Post Code.
